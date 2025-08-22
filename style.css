@@ -4,6 +4,7 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F, U+0130, U+0131, U+015E, U+015F, U+011E, U+011F, U+00C7, U+00E7;
 }
 @font-face {
     font-family: 'Gilmer';
@@ -11,6 +12,7 @@
     font-weight: bold;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F, U+0130, U+0131, U+015E, U+015F, U+011E, U+011F, U+00C7, U+00E7;
 }
 @font-face {
     font-family: 'Gilmer Light';
@@ -18,6 +20,7 @@
     font-weight: 300;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F, U+0130, U+0131, U+015E, U+015F, U+011E, U+011F, U+00C7, U+00E7;
 }
 @font-face {
     font-family: 'Conthrax';
@@ -25,17 +28,21 @@
     font-weight: bold;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F, U+0130, U+0131, U+015E, U+015F, U+011E, U+011F, U+00C7, U+00E7;
 }
 
 body, html {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Gilmer', Arial, sans-serif;
+    font-family: 'Gilmer', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     background: radial-gradient(circle at 20% 40%, #0a2a4d 60%, #0b0f2a 100%);
     color: #fff;
     min-height: 100vh;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 .background {
@@ -231,21 +238,24 @@ body, html {
 
 @media (max-width: 700px) {
     .main-title-panel {
-        width: 98vw;
-        height: 60vw;
-        min-height: 260px;
+        width: 96vw;
+        height: 65vw;
+        min-height: 300px;
+        max-height: 85vh;
     }
     .inside-panel {
-        width: 95%;
-        gap: 10px;
+        width: 92%;
+        gap: 15px;
+        padding: 10px;
     }
     .main-btn-svg, .start-svg {
-        max-width: 98vw;
+        max-width: 95vw;
+        width: 90%;
     }
     .logo {
-        width: 70px;
-        top: 12px;
-        left: 12px;
+        width: 80px;
+        top: 15px;
+        left: 15px;
     }
     .scoreboard {
         right: 15px;
@@ -262,7 +272,21 @@ body, html {
         min-height: 100vh;
     }
     .panel-desc {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+    
+    /* Kullanıcı adı paneli mobil optimizasyonu */
+    .input-svg-wrapper {
+        width: 90%;
+        max-width: 380px;
+        margin: 0 auto 20px auto;
+    }
+    
+    .username-input-on-svg {
+        font-size: 1.1rem;
+        padding: 0 15px;
     }
 }
 
@@ -512,9 +536,9 @@ body, html {
 }
 @media (max-width: 600px) {
     .password-panel-outer {
-        width: 96vw;
-        height: 480px;
-        max-height: 88vh;
+        width: 98vw;
+        height: 520px;
+        max-height: 90vh;
     }
     .password-panel-content {
         top: 85px;
@@ -582,8 +606,8 @@ body, html {
         padding: 18px 0 70px 0;
     }
     .password-panel-outer {
-        height: 450px;
-        max-height: 90vh;
+        height: 480px;
+        max-height: 92vh;
         width: 98vw;
     }
     .svg-box {
@@ -615,6 +639,50 @@ body, html {
         height: auto;
         margin-bottom: 6px;
     }
+    
+    /* Parola ipuçları mobil optimizasyonu */
+    .password-result div {
+        font-size: 0.7rem !important;
+        margin: 3px 0 !important;
+        max-width: 95vw !important;
+        word-wrap: break-word !important;
+    }
+    
+    .password-result div span {
+        font-size: 0.65rem !important;
+        padding: 2px 4px !important;
+        margin: 1px !important;
+        display: inline-block !important;
+        max-width: 90px !important;
+        text-overflow: ellipsis !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+    
+    /* Genel mobil overflow kontrolü */
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    .password-panel-content {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+    }
+    
+    #crack-time {
+        font-size: 1rem !important;
+        padding: 8px 12px !important;
+        margin: 10px auto !important;
+        max-width: 95% !important;
+        word-break: break-word !important;
+    }
+    
+    .strength-badge {
+        font-size: 0.9rem !important;
+        padding: 3px 8px !important;
+        margin: 3px auto !important;
+        max-width: 90% !important;
+    }
 }
 
 .password-result {
@@ -643,21 +711,24 @@ body, html {
 }
 
 #crack-time {
-    margin: 15px 0;
-    font-size: 1.8rem;
+    margin: 15px auto;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
     font-weight: bold;
     color: #ff6b35;
     text-align: center;
     background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(247, 147, 30, 0.2));
     border: 2px solid #ff6b35;
-    border-radius: 15px;
-    padding: 15px 20px;
+    border-radius: 12px;
+    padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
     box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
     animation: pulseGlow 2s infinite alternate;
-    font-family: 'Conthrax', 'Gilmer', Arial, sans-serif;
+    font-family: 'Conthrax', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
     letter-spacing: 1px;
     text-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
     transition: all 0.5s ease;
+    max-width: 90%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Şifre gücüne göre farklı renkler */
